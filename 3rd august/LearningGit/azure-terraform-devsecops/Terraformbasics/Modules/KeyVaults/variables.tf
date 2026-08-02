@@ -1,0 +1,2 @@
+variable "keyvaults" {}
+variable "kvsecret" {}

@@ -1,0 +1,2798 @@
+[
+    {
+        "check_type": "terraform",
+        "results": {
+            "passed_checks": [
+                {
+                    "check_id": "CKV_AZURE_111",
+                    "bc_check_id": "BC_AZR_GENERAL_41",
+                    "check_name": "Ensure that key vault enables soft delete",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": [
+                            "soft_delete_enabled"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "resource \"azurerm_key_vault\" \"resource_keyvault\" {\n"
+                        ],
+                        [
+                            8,
+                            "  for_each                    = var.keyvaults\n"
+                        ],
+                        [
+                            9,
+                            "  name                        = each.value.name\n"
+                        ],
+                        [
+                            10,
+                            "  location                    = data.azurerm_resource_group.data_rg.location\n"
+                        ],
+                        [
+                            11,
+                            "  resource_group_name         = data.azurerm_resource_group.data_rg.name\n"
+                        ],
+                        [
+                            12,
+                            "  rbac_authorization_enabled  = each.value.rbac_authorization_enabled\n"
+                        ],
+                        [
+                            13,
+                            "  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption\n"
+                        ],
+                        [
+                            14,
+                            "  tenant_id                   = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            15,
+                            "  soft_delete_retention_days  = each.value.soft_delete_retention_days\n"
+                        ],
+                        [
+                            16,
+                            "  purge_protection_enabled    = each.value.purge_protection_enabled\n"
+                        ],
+                        [
+                            17,
+                            "\n"
+                        ],
+                        [
+                            18,
+                            "  sku_name = each.value.sku_name\n"
+                        ],
+                        [
+                            19,
+                            "\n"
+                        ],
+                        [
+                            20,
+                            "  access_policy {\n"
+                        ],
+                        [
+                            21,
+                            "    tenant_id = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            22,
+                            "    object_id = data.azurerm_client_config.b18g31.object_id\n"
+                        ],
+                        [
+                            23,
+                            "\n"
+                        ],
+                        [
+                            24,
+                            "    key_permissions = [\n"
+                        ],
+                        [
+                            25,
+                            "      \"Create\",\n"
+                        ],
+                        [
+                            26,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            27,
+                            "    ]\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "    secret_permissions = [\n"
+                        ],
+                        [
+                            30,
+                            "      \"Set\",\n"
+                        ],
+                        [
+                            31,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            32,
+                            "      \"Delete\",\n"
+                        ],
+                        [
+                            33,
+                            "      \"Purge\",\n"
+                        ],
+                        [
+                            34,
+                            "      \"Recover\"\n"
+                        ],
+                        [
+                            35,
+                            "    ]\n"
+                        ],
+                        [
+                            36,
+                            "\n"
+                        ],
+                        [
+                            37,
+                            "    storage_permissions = [\n"
+                        ],
+                        [
+                            38,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            39,
+                            "    ]\n"
+                        ],
+                        [
+                            40,
+                            "  }\n"
+                        ],
+                        [
+                            41,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        7,
+                        41
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.KeyVaultEnablesSoftDelete",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/ensure-that-key-vault-enables-soft-delete",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_183",
+                    "bc_check_id": "BC_AZR_NETWORKING_69",
+                    "check_name": "Ensure that VNET uses local DNS addresses",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": []
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "resource \"azurerm_virtual_network\" \"resource_vnets\" {\n"
+                        ],
+                        [
+                            2,
+                            "  for_each            = var.vnets\n"
+                        ],
+                        [
+                            3,
+                            "  name                = each.value.name\n"
+                        ],
+                        [
+                            4,
+                            "  location            = each.value.location\n"
+                        ],
+                        [
+                            5,
+                            "  resource_group_name = each.value.resource_group\n"
+                        ],
+                        [
+                            6,
+                            "  address_space       = [each.value.address_prefix]\n"
+                        ],
+                        [
+                            7,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\VirtualNetwork\\VirtualNetwork.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\VirtualNetwork\\VirtualNetwork.tf",
+                    "repo_file_path": "/Modules/VirtualNetwork/VirtualNetwork.tf",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "module.virtualnetwork.azurerm_virtual_network.resource_vnets[\"vnet1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.VnetLocalDNS",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        6,
+                        10
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/azr-networking-183",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\VirtualNetwork\\VirtualNetwork.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_182",
+                    "bc_check_id": "BC_AZR_NETWORKING_68",
+                    "check_name": "Ensure that VNET has at least 2 connected DNS Endpoints",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": []
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "resource \"azurerm_virtual_network\" \"resource_vnets\" {\n"
+                        ],
+                        [
+                            2,
+                            "  for_each            = var.vnets\n"
+                        ],
+                        [
+                            3,
+                            "  name                = each.value.name\n"
+                        ],
+                        [
+                            4,
+                            "  location            = each.value.location\n"
+                        ],
+                        [
+                            5,
+                            "  resource_group_name = each.value.resource_group\n"
+                        ],
+                        [
+                            6,
+                            "  address_space       = [each.value.address_prefix]\n"
+                        ],
+                        [
+                            7,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\VirtualNetwork\\VirtualNetwork.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\VirtualNetwork\\VirtualNetwork.tf",
+                    "repo_file_path": "/Modules/VirtualNetwork/VirtualNetwork.tf",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "module.virtualnetwork.azurerm_virtual_network.resource_vnets[\"vnet1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.VnetSingleDNSServer",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        6,
+                        10
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/azr-networking-182",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\VirtualNetwork\\VirtualNetwork.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_118",
+                    "bc_check_id": "BC_AZR_NETWORKING_35",
+                    "check_name": "Ensure that Network Interfaces disable IP forwarding",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": [
+                            "enable_ip_forwarding"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            2,
+                            "resource \"azurerm_network_interface\" \"resource_nics\" {\n"
+                        ],
+                        [
+                            3,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            4,
+                            "  name                = each.value.nic_name\n"
+                        ],
+                        [
+                            5,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            6,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            7,
+                            "\n"
+                        ],
+                        [
+                            8,
+                            "  ip_configuration {\n"
+                        ],
+                        [
+                            9,
+                            "    name                          = \"internal\"\n"
+                        ],
+                        [
+                            10,
+                            "    subnet_id                     = data.azurerm_subnet.data_subnet.id\n"
+                        ],
+                        [
+                            11,
+                            "    private_ip_address_allocation = \"Dynamic\"\n"
+                        ],
+                        [
+                            12,
+                            "    public_ip_address_id = data.azurerm_public_ip.data_pip.id\n"
+                        ],
+                        [
+                            13,
+                            "  }\n"
+                        ],
+                        [
+                            14,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        2,
+                        14
+                    ],
+                    "resource": "module.vms.azurerm_network_interface.resource_nics[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.NetworkInterfaceEnableIPForwarding",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/ensure-that-network-interfaces-disable-ip-forwarding",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_1",
+                    "bc_check_id": "BC_AZR_NETWORKING_1",
+                    "check_name": "Ensure Azure Instance does not use basic authentication(Use SSH Key Instead)",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": []
+                    },
+                    "code_block": [
+                        [
+                            16,
+                            "resource \"azurerm_linux_virtual_machine\" \"resource_rgs\" {\n"
+                        ],
+                        [
+                            17,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            18,
+                            "  name                = each.key\n"
+                        ],
+                        [
+                            19,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            20,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            21,
+                            "  size                = each.value.size\n"
+                        ],
+                        [
+                            22,
+                            "  admin_username      = each.value.admin_username\n"
+                        ],
+                        [
+                            23,
+                            "  network_interface_ids = [\n"
+                        ],
+                        [
+                            24,
+                            "    azurerm_network_interface.resource_nics[each.key].id,\n"
+                        ],
+                        [
+                            25,
+                            "  ]\n"
+                        ],
+                        [
+                            26,
+                            "  admin_password = data.a**********\n"
+                        ],
+                        [
+                            27,
+                            "  disable_password_authentication = each.value.disable_password_authentication\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "\n"
+                        ],
+                        [
+                            30,
+                            "  os_disk {\n"
+                        ],
+                        [
+                            31,
+                            "    caching              = \"ReadWrite\"\n"
+                        ],
+                        [
+                            32,
+                            "    storage_account_type = \"Standard_LRS\"\n"
+                        ],
+                        [
+                            33,
+                            "  }\n"
+                        ],
+                        [
+                            34,
+                            "    source_image_reference {\n"
+                        ],
+                        [
+                            35,
+                            "    publisher = each.value.publisher\n"
+                        ],
+                        [
+                            36,
+                            "    offer     = each.value.offer\n"
+                        ],
+                        [
+                            37,
+                            "    sku       = each.value.sku\n"
+                        ],
+                        [
+                            38,
+                            "    version   = each.value.version\n"
+                        ],
+                        [
+                            39,
+                            "  }\n"
+                        ],
+                        [
+                            40,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        16,
+                        40
+                    ],
+                    "resource": "module.vms.azurerm_linux_virtual_machine.resource_rgs[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.AzureInstancePassword",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/bc-azr-networking-1",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_179",
+                    "bc_check_id": "BC_AZR_GENERAL_103",
+                    "check_name": "Ensure VM agent is installed",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": [
+                            "provision_vm_agent"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            16,
+                            "resource \"azurerm_linux_virtual_machine\" \"resource_rgs\" {\n"
+                        ],
+                        [
+                            17,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            18,
+                            "  name                = each.key\n"
+                        ],
+                        [
+                            19,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            20,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            21,
+                            "  size                = each.value.size\n"
+                        ],
+                        [
+                            22,
+                            "  admin_username      = each.value.admin_username\n"
+                        ],
+                        [
+                            23,
+                            "  network_interface_ids = [\n"
+                        ],
+                        [
+                            24,
+                            "    azurerm_network_interface.resource_nics[each.key].id,\n"
+                        ],
+                        [
+                            25,
+                            "  ]\n"
+                        ],
+                        [
+                            26,
+                            "  admin_password = data.a**********\n"
+                        ],
+                        [
+                            27,
+                            "  disable_password_authentication = each.value.disable_password_authentication\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "\n"
+                        ],
+                        [
+                            30,
+                            "  os_disk {\n"
+                        ],
+                        [
+                            31,
+                            "    caching              = \"ReadWrite\"\n"
+                        ],
+                        [
+                            32,
+                            "    storage_account_type = \"Standard_LRS\"\n"
+                        ],
+                        [
+                            33,
+                            "  }\n"
+                        ],
+                        [
+                            34,
+                            "    source_image_reference {\n"
+                        ],
+                        [
+                            35,
+                            "    publisher = each.value.publisher\n"
+                        ],
+                        [
+                            36,
+                            "    offer     = each.value.offer\n"
+                        ],
+                        [
+                            37,
+                            "    sku       = each.value.sku\n"
+                        ],
+                        [
+                            38,
+                            "    version   = each.value.version\n"
+                        ],
+                        [
+                            39,
+                            "  }\n"
+                        ],
+                        [
+                            40,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        16,
+                        40
+                    ],
+                    "resource": "module.vms.azurerm_linux_virtual_machine.resource_rgs[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.VMAgentIsInstalled",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/azr-general-179",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_149",
+                    "bc_check_id": "BC_AZR_GENERAL_84",
+                    "check_name": "Ensure that Virtual machine does not enable password authentication",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": [
+                            "disable_password_authentication"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            16,
+                            "resource \"azurerm_linux_virtual_machine\" \"resource_rgs\" {\n"
+                        ],
+                        [
+                            17,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            18,
+                            "  name                = each.key\n"
+                        ],
+                        [
+                            19,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            20,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            21,
+                            "  size                = each.value.size\n"
+                        ],
+                        [
+                            22,
+                            "  admin_username      = each.value.admin_username\n"
+                        ],
+                        [
+                            23,
+                            "  network_interface_ids = [\n"
+                        ],
+                        [
+                            24,
+                            "    azurerm_network_interface.resource_nics[each.key].id,\n"
+                        ],
+                        [
+                            25,
+                            "  ]\n"
+                        ],
+                        [
+                            26,
+                            "  admin_password = data.a**********\n"
+                        ],
+                        [
+                            27,
+                            "  disable_password_authentication = each.value.disable_password_authentication\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "\n"
+                        ],
+                        [
+                            30,
+                            "  os_disk {\n"
+                        ],
+                        [
+                            31,
+                            "    caching              = \"ReadWrite\"\n"
+                        ],
+                        [
+                            32,
+                            "    storage_account_type = \"Standard_LRS\"\n"
+                        ],
+                        [
+                            33,
+                            "  }\n"
+                        ],
+                        [
+                            34,
+                            "    source_image_reference {\n"
+                        ],
+                        [
+                            35,
+                            "    publisher = each.value.publisher\n"
+                        ],
+                        [
+                            36,
+                            "    offer     = each.value.offer\n"
+                        ],
+                        [
+                            37,
+                            "    sku       = each.value.sku\n"
+                        ],
+                        [
+                            38,
+                            "    version   = each.value.version\n"
+                        ],
+                        [
+                            39,
+                            "  }\n"
+                        ],
+                        [
+                            40,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        16,
+                        40
+                    ],
+                    "resource": "module.vms.azurerm_linux_virtual_machine.resource_rgs[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.VMDisablePasswordAuthentication",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/ensure-azure-virtual-machine-does-not-enable-password-authentication",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_92",
+                    "bc_check_id": "BC_AZR_GENERAL_66",
+                    "check_name": "Ensure that Virtual Machines use managed disks",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": []
+                    },
+                    "code_block": [
+                        [
+                            16,
+                            "resource \"azurerm_linux_virtual_machine\" \"resource_rgs\" {\n"
+                        ],
+                        [
+                            17,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            18,
+                            "  name                = each.key\n"
+                        ],
+                        [
+                            19,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            20,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            21,
+                            "  size                = each.value.size\n"
+                        ],
+                        [
+                            22,
+                            "  admin_username      = each.value.admin_username\n"
+                        ],
+                        [
+                            23,
+                            "  network_interface_ids = [\n"
+                        ],
+                        [
+                            24,
+                            "    azurerm_network_interface.resource_nics[each.key].id,\n"
+                        ],
+                        [
+                            25,
+                            "  ]\n"
+                        ],
+                        [
+                            26,
+                            "  admin_password = data.a**********\n"
+                        ],
+                        [
+                            27,
+                            "  disable_password_authentication = each.value.disable_password_authentication\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "\n"
+                        ],
+                        [
+                            30,
+                            "  os_disk {\n"
+                        ],
+                        [
+                            31,
+                            "    caching              = \"ReadWrite\"\n"
+                        ],
+                        [
+                            32,
+                            "    storage_account_type = \"Standard_LRS\"\n"
+                        ],
+                        [
+                            33,
+                            "  }\n"
+                        ],
+                        [
+                            34,
+                            "    source_image_reference {\n"
+                        ],
+                        [
+                            35,
+                            "    publisher = each.value.publisher\n"
+                        ],
+                        [
+                            36,
+                            "    offer     = each.value.offer\n"
+                        ],
+                        [
+                            37,
+                            "    sku       = each.value.sku\n"
+                        ],
+                        [
+                            38,
+                            "    version   = each.value.version\n"
+                        ],
+                        [
+                            39,
+                            "  }\n"
+                        ],
+                        [
+                            40,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        16,
+                        40
+                    ],
+                    "resource": "module.vms.azurerm_linux_virtual_machine.resource_rgs[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.VMStorageOsDisk",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/ensure-that-virtual-machines-use-managed-disks",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_119",
+                    "bc_check_id": "BC_AZR_NETWORKING_36",
+                    "check_name": "Ensure that Network Interfaces don't use public IPs",
+                    "check_result": {
+                        "result": "PASSED",
+                        "entity": {
+                            "azurerm_network_interface": {
+                                "resource_nics[\"frontendvm1\"]": {
+                                    "__end_line__": 14,
+                                    "__start_line__": 2,
+                                    "ip_configuration": [
+                                        {
+                                            "name": [
+                                                "internal"
+                                            ],
+                                            "private_ip_address_allocation": [
+                                                "Dynamic"
+                                            ],
+                                            "public_ip_address_id": [
+                                                "data.azurerm_public_ip.data_pip.id"
+                                            ],
+                                            "subnet_id": [
+                                                "data.azurerm_subnet.data_subnet.id"
+                                            ]
+                                        }
+                                    ],
+                                    "location": [
+                                        "data.azurerm_resource_group.data_rgs.location"
+                                    ],
+                                    "name": [
+                                        "frontendnic"
+                                    ],
+                                    "resource_group_name": [
+                                        "avaaneurg2"
+                                    ],
+                                    "__address__": "module.vms.azurerm_network_interface.resource_nics[\"frontendvm1\"]"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "resource_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            2,
+                            "resource \"azurerm_network_interface\" \"resource_nics\" {\n"
+                        ],
+                        [
+                            3,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            4,
+                            "  name                = each.value.nic_name\n"
+                        ],
+                        [
+                            5,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            6,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            7,
+                            "\n"
+                        ],
+                        [
+                            8,
+                            "  ip_configuration {\n"
+                        ],
+                        [
+                            9,
+                            "    name                          = \"internal\"\n"
+                        ],
+                        [
+                            10,
+                            "    subnet_id                     = data.azurerm_subnet.data_subnet.id\n"
+                        ],
+                        [
+                            11,
+                            "    private_ip_address_allocation = \"Dynamic\"\n"
+                        ],
+                        [
+                            12,
+                            "    public_ip_address_id = data.azurerm_public_ip.data_pip.id\n"
+                        ],
+                        [
+                            13,
+                            "  }\n"
+                        ],
+                        [
+                            14,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        2,
+                        14
+                    ],
+                    "resource": "module.vms.azurerm_network_interface.resource_nics[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/ensure-that-network-interfaces-dont-use-public-ips",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                }
+            ],
+            "failed_checks": [
+                {
+                    "check_id": "CKV_AZURE_189",
+                    "bc_check_id": "BC_AZR_NETWORKING_71",
+                    "check_name": "Ensure that Azure Key Vault disables public network access",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "public_network_access_enabled"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "resource \"azurerm_key_vault\" \"resource_keyvault\" {\n"
+                        ],
+                        [
+                            8,
+                            "  for_each                    = var.keyvaults\n"
+                        ],
+                        [
+                            9,
+                            "  name                        = each.value.name\n"
+                        ],
+                        [
+                            10,
+                            "  location                    = data.azurerm_resource_group.data_rg.location\n"
+                        ],
+                        [
+                            11,
+                            "  resource_group_name         = data.azurerm_resource_group.data_rg.name\n"
+                        ],
+                        [
+                            12,
+                            "  rbac_authorization_enabled  = each.value.rbac_authorization_enabled\n"
+                        ],
+                        [
+                            13,
+                            "  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption\n"
+                        ],
+                        [
+                            14,
+                            "  tenant_id                   = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            15,
+                            "  soft_delete_retention_days  = each.value.soft_delete_retention_days\n"
+                        ],
+                        [
+                            16,
+                            "  purge_protection_enabled    = each.value.purge_protection_enabled\n"
+                        ],
+                        [
+                            17,
+                            "\n"
+                        ],
+                        [
+                            18,
+                            "  sku_name = each.value.sku_name\n"
+                        ],
+                        [
+                            19,
+                            "\n"
+                        ],
+                        [
+                            20,
+                            "  access_policy {\n"
+                        ],
+                        [
+                            21,
+                            "    tenant_id = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            22,
+                            "    object_id = data.azurerm_client_config.b18g31.object_id\n"
+                        ],
+                        [
+                            23,
+                            "\n"
+                        ],
+                        [
+                            24,
+                            "    key_permissions = [\n"
+                        ],
+                        [
+                            25,
+                            "      \"Create\",\n"
+                        ],
+                        [
+                            26,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            27,
+                            "    ]\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "    secret_permissions = [\n"
+                        ],
+                        [
+                            30,
+                            "      \"Set\",\n"
+                        ],
+                        [
+                            31,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            32,
+                            "      \"Delete\",\n"
+                        ],
+                        [
+                            33,
+                            "      \"Purge\",\n"
+                        ],
+                        [
+                            34,
+                            "      \"Recover\"\n"
+                        ],
+                        [
+                            35,
+                            "    ]\n"
+                        ],
+                        [
+                            36,
+                            "\n"
+                        ],
+                        [
+                            37,
+                            "    storage_permissions = [\n"
+                        ],
+                        [
+                            38,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            39,
+                            "    ]\n"
+                        ],
+                        [
+                            40,
+                            "  }\n"
+                        ],
+                        [
+                            41,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        7,
+                        41
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.KeyVaultDisablesPublicNetworkAccess",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/azr-networking-189",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_109",
+                    "bc_check_id": "BC_AZR_NETWORKING_33",
+                    "check_name": "Ensure that key vault allows firewall rules settings",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "network_acls/[0]/default_action"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "resource \"azurerm_key_vault\" \"resource_keyvault\" {\n"
+                        ],
+                        [
+                            8,
+                            "  for_each                    = var.keyvaults\n"
+                        ],
+                        [
+                            9,
+                            "  name                        = each.value.name\n"
+                        ],
+                        [
+                            10,
+                            "  location                    = data.azurerm_resource_group.data_rg.location\n"
+                        ],
+                        [
+                            11,
+                            "  resource_group_name         = data.azurerm_resource_group.data_rg.name\n"
+                        ],
+                        [
+                            12,
+                            "  rbac_authorization_enabled  = each.value.rbac_authorization_enabled\n"
+                        ],
+                        [
+                            13,
+                            "  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption\n"
+                        ],
+                        [
+                            14,
+                            "  tenant_id                   = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            15,
+                            "  soft_delete_retention_days  = each.value.soft_delete_retention_days\n"
+                        ],
+                        [
+                            16,
+                            "  purge_protection_enabled    = each.value.purge_protection_enabled\n"
+                        ],
+                        [
+                            17,
+                            "\n"
+                        ],
+                        [
+                            18,
+                            "  sku_name = each.value.sku_name\n"
+                        ],
+                        [
+                            19,
+                            "\n"
+                        ],
+                        [
+                            20,
+                            "  access_policy {\n"
+                        ],
+                        [
+                            21,
+                            "    tenant_id = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            22,
+                            "    object_id = data.azurerm_client_config.b18g31.object_id\n"
+                        ],
+                        [
+                            23,
+                            "\n"
+                        ],
+                        [
+                            24,
+                            "    key_permissions = [\n"
+                        ],
+                        [
+                            25,
+                            "      \"Create\",\n"
+                        ],
+                        [
+                            26,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            27,
+                            "    ]\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "    secret_permissions = [\n"
+                        ],
+                        [
+                            30,
+                            "      \"Set\",\n"
+                        ],
+                        [
+                            31,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            32,
+                            "      \"Delete\",\n"
+                        ],
+                        [
+                            33,
+                            "      \"Purge\",\n"
+                        ],
+                        [
+                            34,
+                            "      \"Recover\"\n"
+                        ],
+                        [
+                            35,
+                            "    ]\n"
+                        ],
+                        [
+                            36,
+                            "\n"
+                        ],
+                        [
+                            37,
+                            "    storage_permissions = [\n"
+                        ],
+                        [
+                            38,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            39,
+                            "    ]\n"
+                        ],
+                        [
+                            40,
+                            "  }\n"
+                        ],
+                        [
+                            41,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        7,
+                        41
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.KeyVaultEnablesFirewallRulesSettings",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-networking-policies/ensure-that-key-vault-allows-firewall-rules-settings",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_110",
+                    "bc_check_id": "BC_AZR_GENERAL_40",
+                    "check_name": "Ensure that key vault enables purge protection",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "purge_protection_enabled"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "resource \"azurerm_key_vault\" \"resource_keyvault\" {\n"
+                        ],
+                        [
+                            8,
+                            "  for_each                    = var.keyvaults\n"
+                        ],
+                        [
+                            9,
+                            "  name                        = each.value.name\n"
+                        ],
+                        [
+                            10,
+                            "  location                    = data.azurerm_resource_group.data_rg.location\n"
+                        ],
+                        [
+                            11,
+                            "  resource_group_name         = data.azurerm_resource_group.data_rg.name\n"
+                        ],
+                        [
+                            12,
+                            "  rbac_authorization_enabled  = each.value.rbac_authorization_enabled\n"
+                        ],
+                        [
+                            13,
+                            "  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption\n"
+                        ],
+                        [
+                            14,
+                            "  tenant_id                   = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            15,
+                            "  soft_delete_retention_days  = each.value.soft_delete_retention_days\n"
+                        ],
+                        [
+                            16,
+                            "  purge_protection_enabled    = each.value.purge_protection_enabled\n"
+                        ],
+                        [
+                            17,
+                            "\n"
+                        ],
+                        [
+                            18,
+                            "  sku_name = each.value.sku_name\n"
+                        ],
+                        [
+                            19,
+                            "\n"
+                        ],
+                        [
+                            20,
+                            "  access_policy {\n"
+                        ],
+                        [
+                            21,
+                            "    tenant_id = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            22,
+                            "    object_id = data.azurerm_client_config.b18g31.object_id\n"
+                        ],
+                        [
+                            23,
+                            "\n"
+                        ],
+                        [
+                            24,
+                            "    key_permissions = [\n"
+                        ],
+                        [
+                            25,
+                            "      \"Create\",\n"
+                        ],
+                        [
+                            26,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            27,
+                            "    ]\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "    secret_permissions = [\n"
+                        ],
+                        [
+                            30,
+                            "      \"Set\",\n"
+                        ],
+                        [
+                            31,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            32,
+                            "      \"Delete\",\n"
+                        ],
+                        [
+                            33,
+                            "      \"Purge\",\n"
+                        ],
+                        [
+                            34,
+                            "      \"Recover\"\n"
+                        ],
+                        [
+                            35,
+                            "    ]\n"
+                        ],
+                        [
+                            36,
+                            "\n"
+                        ],
+                        [
+                            37,
+                            "    storage_permissions = [\n"
+                        ],
+                        [
+                            38,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            39,
+                            "    ]\n"
+                        ],
+                        [
+                            40,
+                            "  }\n"
+                        ],
+                        [
+                            41,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        7,
+                        41
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.KeyVaultEnablesPurgeProtection",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/ensure-that-key-vault-enables-purge-protection",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_42",
+                    "bc_check_id": "BC_AZR_GENERAL_11",
+                    "check_name": "Ensure the key vault is recoverable",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "purge_protection_enabled",
+                            "soft_delete_enabled"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "resource \"azurerm_key_vault\" \"resource_keyvault\" {\n"
+                        ],
+                        [
+                            8,
+                            "  for_each                    = var.keyvaults\n"
+                        ],
+                        [
+                            9,
+                            "  name                        = each.value.name\n"
+                        ],
+                        [
+                            10,
+                            "  location                    = data.azurerm_resource_group.data_rg.location\n"
+                        ],
+                        [
+                            11,
+                            "  resource_group_name         = data.azurerm_resource_group.data_rg.name\n"
+                        ],
+                        [
+                            12,
+                            "  rbac_authorization_enabled  = each.value.rbac_authorization_enabled\n"
+                        ],
+                        [
+                            13,
+                            "  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption\n"
+                        ],
+                        [
+                            14,
+                            "  tenant_id                   = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            15,
+                            "  soft_delete_retention_days  = each.value.soft_delete_retention_days\n"
+                        ],
+                        [
+                            16,
+                            "  purge_protection_enabled    = each.value.purge_protection_enabled\n"
+                        ],
+                        [
+                            17,
+                            "\n"
+                        ],
+                        [
+                            18,
+                            "  sku_name = each.value.sku_name\n"
+                        ],
+                        [
+                            19,
+                            "\n"
+                        ],
+                        [
+                            20,
+                            "  access_policy {\n"
+                        ],
+                        [
+                            21,
+                            "    tenant_id = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            22,
+                            "    object_id = data.azurerm_client_config.b18g31.object_id\n"
+                        ],
+                        [
+                            23,
+                            "\n"
+                        ],
+                        [
+                            24,
+                            "    key_permissions = [\n"
+                        ],
+                        [
+                            25,
+                            "      \"Create\",\n"
+                        ],
+                        [
+                            26,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            27,
+                            "    ]\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "    secret_permissions = [\n"
+                        ],
+                        [
+                            30,
+                            "      \"Set\",\n"
+                        ],
+                        [
+                            31,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            32,
+                            "      \"Delete\",\n"
+                        ],
+                        [
+                            33,
+                            "      \"Purge\",\n"
+                        ],
+                        [
+                            34,
+                            "      \"Recover\"\n"
+                        ],
+                        [
+                            35,
+                            "    ]\n"
+                        ],
+                        [
+                            36,
+                            "\n"
+                        ],
+                        [
+                            37,
+                            "    storage_permissions = [\n"
+                        ],
+                        [
+                            38,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            39,
+                            "    ]\n"
+                        ],
+                        [
+                            40,
+                            "  }\n"
+                        ],
+                        [
+                            41,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        7,
+                        41
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.KeyvaultRecoveryEnabled",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/ensure-the-key-vault-is-recoverable",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_114",
+                    "bc_check_id": "BC_AZR_GENERAL_42",
+                    "check_name": "Ensure that key vault secrets have \"content_type\" set",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "content_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            43,
+                            "resource \"azurerm_key_vault_secret\" \"resource_kvsecret\" {\n"
+                        ],
+                        [
+                            44,
+                            "  name         = var.kvsecret.name\n"
+                        ],
+                        [
+                            45,
+                            "  value        = var.kvsecret.value\n"
+                        ],
+                        [
+                            46,
+                            "  key_vault_id = azurerm_key_vault.resource_keyvault[\"kv1\"].id\n"
+                        ],
+                        [
+                            47,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        43,
+                        47
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault_secret.resource_kvsecret",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.SecretContentType",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/ensure-that-key-vault-secrets-have-content-type-set",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_41",
+                    "bc_check_id": "BC_AZR_SECRETS_1",
+                    "check_name": "Ensure that the expiration date is set on all secrets",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "expiration_date"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            43,
+                            "resource \"azurerm_key_vault_secret\" \"resource_kvsecret\" {\n"
+                        ],
+                        [
+                            44,
+                            "  name         = var.kvsecret.name\n"
+                        ],
+                        [
+                            45,
+                            "  value        = var.kvsecret.value\n"
+                        ],
+                        [
+                            46,
+                            "  key_vault_id = azurerm_key_vault.resource_keyvault[\"kv1\"].id\n"
+                        ],
+                        [
+                            47,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        43,
+                        47
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault_secret.resource_kvsecret",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.SecretExpirationDate",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        24,
+                        30
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-secrets-policies/set-an-expiration-date-on-all-secrets",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_50",
+                    "bc_check_id": "BC_AZR_GENERAL_14",
+                    "check_name": "Ensure Virtual Machine Extensions are not Installed",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "allow_extension_operations"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            16,
+                            "resource \"azurerm_linux_virtual_machine\" \"resource_rgs\" {\n"
+                        ],
+                        [
+                            17,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            18,
+                            "  name                = each.key\n"
+                        ],
+                        [
+                            19,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            20,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            21,
+                            "  size                = each.value.size\n"
+                        ],
+                        [
+                            22,
+                            "  admin_username      = each.value.admin_username\n"
+                        ],
+                        [
+                            23,
+                            "  network_interface_ids = [\n"
+                        ],
+                        [
+                            24,
+                            "    azurerm_network_interface.resource_nics[each.key].id,\n"
+                        ],
+                        [
+                            25,
+                            "  ]\n"
+                        ],
+                        [
+                            26,
+                            "  admin_password = data.a**********\n"
+                        ],
+                        [
+                            27,
+                            "  disable_password_authentication = each.value.disable_password_authentication\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "\n"
+                        ],
+                        [
+                            30,
+                            "  os_disk {\n"
+                        ],
+                        [
+                            31,
+                            "    caching              = \"ReadWrite\"\n"
+                        ],
+                        [
+                            32,
+                            "    storage_account_type = \"Standard_LRS\"\n"
+                        ],
+                        [
+                            33,
+                            "  }\n"
+                        ],
+                        [
+                            34,
+                            "    source_image_reference {\n"
+                        ],
+                        [
+                            35,
+                            "    publisher = each.value.publisher\n"
+                        ],
+                        [
+                            36,
+                            "    offer     = each.value.offer\n"
+                        ],
+                        [
+                            37,
+                            "    sku       = each.value.sku\n"
+                        ],
+                        [
+                            38,
+                            "    version   = each.value.version\n"
+                        ],
+                        [
+                            39,
+                            "  }\n"
+                        ],
+                        [
+                            40,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        16,
+                        40
+                    ],
+                    "resource": "module.vms.azurerm_linux_virtual_machine.resource_rgs[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.AzureInstanceExtensions",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/bc-azr-general-14",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV_AZURE_178",
+                    "bc_check_id": "BC_AZR_GENERAL_102",
+                    "check_name": "Ensure linux VM enables SSH with keys for secure communication",
+                    "check_result": {
+                        "result": "FAILED",
+                        "evaluated_keys": [
+                            "admin_ssh_key/[0]/public_key"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            16,
+                            "resource \"azurerm_linux_virtual_machine\" \"resource_rgs\" {\n"
+                        ],
+                        [
+                            17,
+                            "  for_each = var.vms\n"
+                        ],
+                        [
+                            18,
+                            "  name                = each.key\n"
+                        ],
+                        [
+                            19,
+                            "  resource_group_name = data.azurerm_resource_group.data_rgs.name\n"
+                        ],
+                        [
+                            20,
+                            "  location            = data.azurerm_resource_group.data_rgs.location\n"
+                        ],
+                        [
+                            21,
+                            "  size                = each.value.size\n"
+                        ],
+                        [
+                            22,
+                            "  admin_username      = each.value.admin_username\n"
+                        ],
+                        [
+                            23,
+                            "  network_interface_ids = [\n"
+                        ],
+                        [
+                            24,
+                            "    azurerm_network_interface.resource_nics[each.key].id,\n"
+                        ],
+                        [
+                            25,
+                            "  ]\n"
+                        ],
+                        [
+                            26,
+                            "  admin_password = data.a**********\n"
+                        ],
+                        [
+                            27,
+                            "  disable_password_authentication = each.value.disable_password_authentication\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "\n"
+                        ],
+                        [
+                            30,
+                            "  os_disk {\n"
+                        ],
+                        [
+                            31,
+                            "    caching              = \"ReadWrite\"\n"
+                        ],
+                        [
+                            32,
+                            "    storage_account_type = \"Standard_LRS\"\n"
+                        ],
+                        [
+                            33,
+                            "  }\n"
+                        ],
+                        [
+                            34,
+                            "    source_image_reference {\n"
+                        ],
+                        [
+                            35,
+                            "    publisher = each.value.publisher\n"
+                        ],
+                        [
+                            36,
+                            "    offer     = each.value.offer\n"
+                        ],
+                        [
+                            37,
+                            "    sku       = each.value.sku\n"
+                        ],
+                        [
+                            38,
+                            "    version   = each.value.version\n"
+                        ],
+                        [
+                            39,
+                            "  }\n"
+                        ],
+                        [
+                            40,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\linux_vms\\virtualmachines.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf",
+                    "repo_file_path": "/Modules/linux_vms/virtualmachines.tf",
+                    "file_line_range": [
+                        16,
+                        40
+                    ],
+                    "resource": "module.vms.azurerm_linux_virtual_machine.resource_rgs[\"frontendvm1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.azure.LinuxVMUsesSSH",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": "\\Environments\\Dev\\main.tf",
+                    "caller_file_line_range": [
+                        32,
+                        36
+                    ],
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/azr-general-178",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\linux_vms\\virtualmachines.tf"
+                },
+                {
+                    "check_id": "CKV2_AZURE_32",
+                    "bc_check_id": "BC_AZR_GENERAL_125",
+                    "check_name": "Ensure private endpoint is configured to key vault",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "azurerm_key_vault": {
+                                "resource_keyvault[\"kv1\"]": {
+                                    "__end_line__": 41,
+                                    "__start_line__": 7,
+                                    "access_policy": [
+                                        {
+                                            "key_permissions": [
+                                                [
+                                                    "Create",
+                                                    "Get"
+                                                ]
+                                            ],
+                                            "object_id": [
+                                                "data.azurerm_client_config.b18g31.object_id"
+                                            ],
+                                            "secret_permissions": [
+                                                [
+                                                    "Delete",
+                                                    "Get",
+                                                    "Purge",
+                                                    "Recover",
+                                                    "Set"
+                                                ]
+                                            ],
+                                            "storage_permissions": [
+                                                [
+                                                    "Get"
+                                                ]
+                                            ],
+                                            "tenant_id": [
+                                                "data.azurerm_client_config.b18g31.tenant_id"
+                                            ]
+                                        }
+                                    ],
+                                    "enabled_for_disk_encryption": [
+                                        true
+                                    ],
+                                    "location": [
+                                        "data.azurerm_resource_group.data_rg.location"
+                                    ],
+                                    "name": [
+                                        "avaakeyvault1-dev"
+                                    ],
+                                    "purge_protection_enabled": [
+                                        false
+                                    ],
+                                    "rbac_authorization_enabled": [
+                                        false
+                                    ],
+                                    "resource_group_name": [
+                                        "avaaneurg1"
+                                    ],
+                                    "sku_name": [
+                                        "standard"
+                                    ],
+                                    "soft_delete_retention_days": [
+                                        7
+                                    ],
+                                    "tenant_id": [
+                                        "data.azurerm_client_config.b18g31.tenant_id"
+                                    ],
+                                    "__address__": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "resource_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "resource \"azurerm_key_vault\" \"resource_keyvault\" {\n"
+                        ],
+                        [
+                            8,
+                            "  for_each                    = var.keyvaults\n"
+                        ],
+                        [
+                            9,
+                            "  name                        = each.value.name\n"
+                        ],
+                        [
+                            10,
+                            "  location                    = data.azurerm_resource_group.data_rg.location\n"
+                        ],
+                        [
+                            11,
+                            "  resource_group_name         = data.azurerm_resource_group.data_rg.name\n"
+                        ],
+                        [
+                            12,
+                            "  rbac_authorization_enabled  = each.value.rbac_authorization_enabled\n"
+                        ],
+                        [
+                            13,
+                            "  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption\n"
+                        ],
+                        [
+                            14,
+                            "  tenant_id                   = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            15,
+                            "  soft_delete_retention_days  = each.value.soft_delete_retention_days\n"
+                        ],
+                        [
+                            16,
+                            "  purge_protection_enabled    = each.value.purge_protection_enabled\n"
+                        ],
+                        [
+                            17,
+                            "\n"
+                        ],
+                        [
+                            18,
+                            "  sku_name = each.value.sku_name\n"
+                        ],
+                        [
+                            19,
+                            "\n"
+                        ],
+                        [
+                            20,
+                            "  access_policy {\n"
+                        ],
+                        [
+                            21,
+                            "    tenant_id = data.azurerm_client_config.b18g31.tenant_id\n"
+                        ],
+                        [
+                            22,
+                            "    object_id = data.azurerm_client_config.b18g31.object_id\n"
+                        ],
+                        [
+                            23,
+                            "\n"
+                        ],
+                        [
+                            24,
+                            "    key_permissions = [\n"
+                        ],
+                        [
+                            25,
+                            "      \"Create\",\n"
+                        ],
+                        [
+                            26,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            27,
+                            "    ]\n"
+                        ],
+                        [
+                            28,
+                            "\n"
+                        ],
+                        [
+                            29,
+                            "    secret_permissions = [\n"
+                        ],
+                        [
+                            30,
+                            "      \"Set\",\n"
+                        ],
+                        [
+                            31,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            32,
+                            "      \"Delete\",\n"
+                        ],
+                        [
+                            33,
+                            "      \"Purge\",\n"
+                        ],
+                        [
+                            34,
+                            "      \"Recover\"\n"
+                        ],
+                        [
+                            35,
+                            "    ]\n"
+                        ],
+                        [
+                            36,
+                            "\n"
+                        ],
+                        [
+                            37,
+                            "    storage_permissions = [\n"
+                        ],
+                        [
+                            38,
+                            "      \"Get\",\n"
+                        ],
+                        [
+                            39,
+                            "    ]\n"
+                        ],
+                        [
+                            40,
+                            "  }\n"
+                        ],
+                        [
+                            41,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\KeyVaults\\keyvault.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf",
+                    "repo_file_path": "/Modules/KeyVaults/keyvault.tf",
+                    "file_line_range": [
+                        7,
+                        41
+                    ],
+                    "resource": "module.kvs.azurerm_key_vault.resource_keyvault[\"kv1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/bc-azure-2-32",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\KeyVaults\\keyvault.tf"
+                },
+                {
+                    "check_id": "CKV2_AZURE_31",
+                    "bc_check_id": "BC_AZR_GENERAL_124",
+                    "check_name": "Ensure VNET subnet is configured with a Network Security Group (NSG)",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "azurerm_subnet": {
+                                "resource_subnets": {
+                                    "__end_line__": 7,
+                                    "__start_line__": 1,
+                                    "address_prefixes": [
+                                        "each.value.address_prefix"
+                                    ],
+                                    "for_each": [
+                                        "var.subnets"
+                                    ],
+                                    "name": [
+                                        "each.key"
+                                    ],
+                                    "resource_group_name": [
+                                        "each.value.resource_group_name"
+                                    ],
+                                    "virtual_network_name": [
+                                        "each.value.virtual_network_name"
+                                    ],
+                                    "__address__": "azurerm_subnet.resource_subnets"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "delegation/service_delegation/name",
+                            "name",
+                            "resource_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "resource \"azurerm_subnet\" \"resource_subnets\" {\n"
+                        ],
+                        [
+                            2,
+                            "  for_each             = var.subnets\n"
+                        ],
+                        [
+                            3,
+                            "  name                 = each.key\n"
+                        ],
+                        [
+                            4,
+                            "  resource_group_name  = each.value.resource_group_name\n"
+                        ],
+                        [
+                            5,
+                            "  virtual_network_name = each.value.virtual_network_name\n"
+                        ],
+                        [
+                            6,
+                            "  address_prefixes     = each.value.address_prefix\n"
+                        ],
+                        [
+                            7,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\Subnets\\Subnets.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\Subnets\\Subnets.tf",
+                    "repo_file_path": "/Modules/Subnets/Subnets.tf",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "azurerm_subnet.resource_subnets",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/bc-azure-2-31",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\Subnets\\Subnets.tf"
+                },
+                {
+                    "check_id": "CKV2_AZURE_31",
+                    "bc_check_id": "BC_AZR_GENERAL_124",
+                    "check_name": "Ensure VNET subnet is configured with a Network Security Group (NSG)",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "azurerm_subnet": {
+                                "resource_subnets[\"avaaneudev-fsubnet1\"]": {
+                                    "__end_line__": 7,
+                                    "__start_line__": 1,
+                                    "address_prefixes": [
+                                        "10.0.1.0/24"
+                                    ],
+                                    "name": [
+                                        "avaaneudev-fsubnet1"
+                                    ],
+                                    "resource_group_name": [
+                                        "avaaneurg2"
+                                    ],
+                                    "virtual_network_name": [
+                                        "avaavnetdev-SHUDH"
+                                    ],
+                                    "__address__": "module.subnet.azurerm_subnet.resource_subnets[\"avaaneudev-fsubnet1\"]"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "delegation/service_delegation/name",
+                            "name",
+                            "resource_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "resource \"azurerm_subnet\" \"resource_subnets\" {\n"
+                        ],
+                        [
+                            2,
+                            "  for_each             = var.subnets\n"
+                        ],
+                        [
+                            3,
+                            "  name                 = each.key\n"
+                        ],
+                        [
+                            4,
+                            "  resource_group_name  = each.value.resource_group_name\n"
+                        ],
+                        [
+                            5,
+                            "  virtual_network_name = each.value.virtual_network_name\n"
+                        ],
+                        [
+                            6,
+                            "  address_prefixes     = each.value.address_prefix\n"
+                        ],
+                        [
+                            7,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\subnets\\Subnets.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\subnets\\Subnets.tf",
+                    "repo_file_path": "/Modules/subnets/Subnets.tf",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "module.subnet.azurerm_subnet.resource_subnets[\"avaaneudev-fsubnet1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/bc-azure-2-31",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\subnets\\Subnets.tf"
+                },
+                {
+                    "check_id": "CKV2_AZURE_31",
+                    "bc_check_id": "BC_AZR_GENERAL_124",
+                    "check_name": "Ensure VNET subnet is configured with a Network Security Group (NSG)",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "azurerm_subnet": {
+                                "resource_subnets[\"avaaneudev-bsubnet1\"]": {
+                                    "__end_line__": 7,
+                                    "__start_line__": 1,
+                                    "address_prefixes": [
+                                        "10.0.2.0/24"
+                                    ],
+                                    "name": [
+                                        "avaaneudev-bsubnet1"
+                                    ],
+                                    "resource_group_name": [
+                                        "avaaneurg2"
+                                    ],
+                                    "virtual_network_name": [
+                                        "avaavnetdev-SHUDH"
+                                    ],
+                                    "__address__": "module.subnet.azurerm_subnet.resource_subnets[\"avaaneudev-bsubnet1\"]"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "delegation/service_delegation/name",
+                            "name",
+                            "resource_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "resource \"azurerm_subnet\" \"resource_subnets\" {\n"
+                        ],
+                        [
+                            2,
+                            "  for_each             = var.subnets\n"
+                        ],
+                        [
+                            3,
+                            "  name                 = each.key\n"
+                        ],
+                        [
+                            4,
+                            "  resource_group_name  = each.value.resource_group_name\n"
+                        ],
+                        [
+                            5,
+                            "  virtual_network_name = each.value.virtual_network_name\n"
+                        ],
+                        [
+                            6,
+                            "  address_prefixes     = each.value.address_prefix\n"
+                        ],
+                        [
+                            7,
+                            "}"
+                        ]
+                    ],
+                    "file_path": "\\Modules\\subnets\\Subnets.tf",
+                    "file_abs_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\subnets\\Subnets.tf",
+                    "repo_file_path": "/Modules/subnets/Subnets.tf",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "module.subnet.azurerm_subnet.resource_subnets[\"avaaneudev-bsubnet1\"]",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/azure-policies/azure-general-policies/bc-azure-2-31",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "C:\\Users\\pawan\\terraform\\13 July 2026\\Modules\\subnets\\Subnets.tf"
+                }
+            ],
+            "skipped_checks": [],
+            "parsing_errors": []
+        },
+        "summary": {
+            "passed": 9,
+            "failed": 12,
+            "skipped": 0,
+            "parsing_errors": 0,
+            "resource_count": 10,
+            "checkov_version": "3.3.8"
+        },
+        "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+    },
+    {
+        "check_type": "terraform_plan",
+        "results": {
+            "passed_checks": [],
+            "failed_checks": [],
+            "skipped_checks": [],
+            "parsing_errors": [
+                ".\\checkov-report.json"
+            ]
+        },
+        "summary": {
+            "passed": 0,
+            "failed": 0,
+            "skipped": 0,
+            "parsing_errors": 1,
+            "resource_count": 0,
+            "checkov_version": "3.3.8"
+        },
+        "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+    }
+]

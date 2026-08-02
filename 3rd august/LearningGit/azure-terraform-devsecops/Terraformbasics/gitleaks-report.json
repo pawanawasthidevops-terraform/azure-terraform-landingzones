@@ -1,0 +1,25 @@
+[
+ {
+  "RuleID": "terraform-admin-password",
+  "Description": "Detect Terraform admin_password",
+  "StartLine": 40,
+  "EndLine": 40,
+  "StartColumn": 6,
+  "EndColumn": 52,
+  "Match": "admin_password                  = \"Admin@12345\"",
+  "Secret": "admin_password                  = \"Admin@12345\"",
+  "File": "Environments/Dev/terraform.tfvars",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.4808545,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [
+   "terraform",
+   "password"
+  ],
+  "Fingerprint": "Environments/Dev/terraform.tfvars:terraform-admin-password:40"
+ }
+]
