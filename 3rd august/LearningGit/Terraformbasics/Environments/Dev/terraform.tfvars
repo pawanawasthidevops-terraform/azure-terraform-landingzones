@@ -44,6 +44,17 @@ vms = {
     sku                             = "22_04-lts"
     version                         = "latest"
   }
+        backendvm1 = {
+    nic_name                        = "backendnic"
+    size                            = "Standard_D2_v3"
+    admin_username                  = "adminuser123"
+    admin_password                  = "Admin@12345"
+    disable_password_authentication = "false"
+    publisher                       = "Canonical"
+    offer                           = "0001-com-ubuntu-server-jammy"
+    sku                             = "22_04-lts"
+    version                         = "latest"
+  }
 }
 
 keyvaults = {
